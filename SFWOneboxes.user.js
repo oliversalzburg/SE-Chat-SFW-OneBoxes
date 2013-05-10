@@ -45,6 +45,11 @@ function livequery($) {
     * Docs: http://docs.jquery.com/Plugins/livequery
     */
 
+    if($.livequery) {
+      // livequery already injected
+      return;
+    }
+
     $.extend($.fn, {
         livequery: function(type, fn, fn2) {
             var self = this, q;
