@@ -286,7 +286,7 @@ function main($) {
         // Construct a new anchor element that links to the given content.
         var newElement = $("<a>").attr("href",imageLink);
         // Store a reference to the onebox content in the new node
-        newElement.data("onebox",oneboxContent);
+        //newElement.data("onebox",oneboxContent);
         // Set the text of the new node to the link retrieved earlier
         newElement.text(imageLink);
         // Append the onebox to the parent, so it will display nicely under it.
@@ -294,15 +294,43 @@ function main($) {
         // Replace the old link with our new anchor
         linkElement.replaceWith(newElement);
 
+        var expando = $("<a>");
+        expando.css(
+          {
+            "background-image":"url(//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/img/glyphicons-halflings-white.png)",
+            "background-position":"-313px -119px",
+            "background-color":"#000",
+            "margin-right":"1em",
+            "display":"inline-block",
+            "width":"1em",
+            "height":"1em"
+          }
+        );
+
+        expando.data("onebox",oneboxContent);
+        newElement.before(expando);
+
+        expando.click(function(){
+          var oneboxContent = $(this).data("onebox");
+          if( oneboxContent.css("position") == "absolute") {
+            oneboxContent.css("position","relative");
+          } else {
+            oneboxContent.css("position","absolute");
+            oneboxContent.hide();
+          }
+        });
+
         // Set a hover listener to display the onebox dynamically
-        newElement.hover(
+        expando.hover(
           function(){
             var oneboxContent = $(this).data("onebox");
             oneboxContent.show();
           },
           function(){
             var oneboxContent = $(this).data("onebox");
-            oneboxContent.hide();
+            if( oneboxContent.css("position") == "absolute") {
+              oneboxContent.hide();
+            }
           }
         );
     });
