@@ -295,17 +295,29 @@ function main($) {
         linkElement.replaceWith(newElement);
 
         var expando = $("<a>");
+        //expando.addClass("button");
         expando.css(
           {
-            "background-image":"url(//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/img/glyphicons-halflings-white.png)",
-            "background-position":"-313px -119px",
-            "background-color":"#000",
             "margin-right":"1em",
             "display":"inline-block",
             "width":"1em",
-            "height":"1em"
+            "height":"1em",
+            "padding":"1px 6px 3px 5px",
+            "background-color":"#1086a4",
+            "border-radius":"10px"
           }
         );
+        var expandoIcon = $("<i>" );
+        expandoIcon.css(
+          {
+            "background-image":"url(//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/img/glyphicons-halflings-white.png)",
+            "background-position":"-313px -119px",
+            "display":"inline-block",
+            "width":"14px",
+            "height":"14px"
+          }
+        );
+        expando.append(expandoIcon);
 
         expando.data("onebox",oneboxContent);
         newElement.before(expando);
